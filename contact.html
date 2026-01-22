@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Ab-Snack</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- STYLE KONSISTEN --- */
+        :root {
+            --primary-black: #111111;
+            --primary-gold: #F5A623;
+            --bg-beige: #FFFBF5;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #444;
+            background-color: #fff;
+            padding-top: 80px;
+        }
+
+        h1, h2, h3, h4, h5 {
+            color: var(--primary-black);
+            font-weight: 700;
+        }
+
+        .text-gold { color: var(--primary-gold); }
+        .bg-beige { background-color: var(--bg-beige); }
+
+        /* Buttons */
+        .btn-black {
+            background-color: var(--primary-black);
+            color: white;
+            border-radius: 50px;
+            padding: 12px 35px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 2px solid var(--primary-black);
+            width: 100%; /* Full width di form */
+        }
+        .btn-black:hover {
+            background-color: white;
+            color: var(--primary-black);
+        }
+
+        .btn-gold-circle {
+            background-color: var(--primary-gold);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+        }
+
+        /* Navbar */
+        .navbar {
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .navbar-brand { font-weight: 800; font-size: 1.5rem; letter-spacing: 1px; color: var(--primary-black) !important; }
+        .nav-link { font-weight: 500; color: #333 !important; margin: 0 10px; transition: color 0.3s; position: relative; }
+        
+        .nav-link:hover, .nav-link.active { color: var(--primary-gold) !important; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 50%; background-color: var(--primary-gold); transition: all 0.3s; transform: translateX(-50%); }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+        /* Tombol WA Navbar */
+        .btn-wa-navbar {
+            background-color: var(--primary-black); color: white; border-radius: 50px;
+            padding: 10px 25px; font-weight: 600; font-size: 0.9rem; border: 2px solid var(--primary-black);
+            transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-wa-navbar:hover {
+            background-color: var(--primary-gold); border-color: var(--primary-gold);
+            color: white; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(245, 166, 35, 0.3);
+        }
+        .navbar-toggler { border: none; } .navbar-toggler:focus { box-shadow: none; }
+
+
+        /* --- CONTACT SPECIFIC --- */
+        .page-header {
+            padding-top: 50px;
+            padding-bottom: 60px;
+            background-color: var(--bg-beige);
+            text-align: center;
+        }
+
+        /* Info Cards */
+        .contact-info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #eee;
+            text-align: center;
+            height: 100%;
+            transition: transform 0.3s;
+        }
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-color: var(--primary-gold);
+        }
+        .icon-wrapper {
+            width: 70px;
+            height: 70px;
+            background-color: var(--bg-beige);
+            color: var(--primary-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5rem;
+        }
+
+        /* Form Styling */
+        .form-control {
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #fcfcfc;
+            margin-bottom: 20px;
+        }
+        .form-control:focus {
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 0 0.2rem rgba(245, 166, 35, 0.15);
+        }
+        
+        /* Map Container */
+        .map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            height: 100%;
+            min-height: 400px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        
+        /* Footer */
+        footer { background-color: #fff; padding: 50px 0 20px; border-top: 1px solid #eee; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">AB-SNACK</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav text-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="product.html">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+                </ul>
+                
+                <div class="d-lg-none mt-3 text-center">
+                     <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Ab-Snack,%20saya%20mau%20tanya%20produk" target="_blank" class="btn-wa-navbar w-100 justify-content-center">
+                        <i class="fab fa-whatsapp fa-lg"></i> Chat Admin
+                    </a>
+                </div>
+            </div>
+
+            <div class="d-none d-lg-block">
+                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Ab-Snack,%20saya%20mau%20tanya%20produk" target="_blank" class="btn-wa-navbar">
+                    <i class="fab fa-whatsapp fa-lg"></i> Chat Admin
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1 class="display-5 mb-2">Get in <span class="text-gold">Touch</span></h1>
+            <p class="text-muted w-75 mx-auto">Punya pertanyaan seputar produk atau kemitraan? Kami siap membantu Anda.</p>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="contact-info-card">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h5 class="mb-2">Call Us</h5>
+                        <p class="text-muted small mb-0">Senin - Jumat (09:00 - 17:00)</p>
+                        <p class="fw-bold mt-2">+62 812-3456-7890</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-info-card">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h5 class="mb-2">Email Us</h5>
+                        <p class="text-muted small mb-0">Kami membalas dalam 24 jam</p>
+                        <p class="fw-bold mt-2">hello@absnack.com</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-info-card">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h5 class="mb-2">Visit Us</h5>
+                        <p class="text-muted small mb-0">Head Office</p>
+                        <p class="fw-bold mt-2">Jl. Sudirman No. 45, Jakarta</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-5">
+        <div class="container pb-4">
+            <div class="row g-5">
+                
+                <div class="col-lg-6">
+                    <h3 class="mb-4">Send us a Message</h3>
+                    <form onsubmit="kirimKeWhatsApp(event)">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" id="namaDepan" class="form-control" placeholder="First Name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="namaBelakang" class="form-control" placeholder="Last Name" required>
+                            </div>
+                        </div>
+                        <input type="email" id="email" class="form-control" placeholder="Email Address" required>
+                        <input type="text" id="subject" class="form-control" placeholder="Subject" required>
+                        <textarea id="pesan" class="form-control" rows="5" placeholder="Your Message..." required></textarea>
+                        
+                        <button type="submit" class="btn btn-black mt-2">
+                            <i class="fab fa-whatsapp me-2"></i> Send to WhatsApp
+                        </button>
+                    </form>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126920.2458428577!2d106.75881479815049!3d-6.229728032731873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e945e34b9d%3A0x5371bf0fdad786a2!2sJakarta%2C%20Special%20Capital%20Region%20of%20Jakarta!5e0!3m2!1sen!2sid!4v1689654321098!5m2!1sen!2sid" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light text-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <h4 class="mb-3">Quick Question?</h4>
+                    <p class="text-muted mb-4">Sebelum mengirim pesan, mungkin pertanyaan Anda sudah terjawab di halaman FAQ kami.</p>
+                    <a href="index.html#faq-section" class="text-gold fw-bold text-decoration-none">Check FAQ's <i class="fas fa-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white pt-5 pb-4 border-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="fw-bold mb-3">AB-SNACK</h4>
+                    <p class="text-muted small w-75">Solusi ngemil sehat tanpa rasa bersalah. Dibuat dengan cinta dan bahan alami.</p>
+                    <div class="mt-3">
+                        <a href="#" class="text-dark me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-dark me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-dark me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2 mb-4">
+                    <h6 class="fw-bold mb-3">Product</h6>
+                    <ul class="list-unstyled text-muted small">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Choco Bar</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Peanut Bar</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Berry Mix</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2 mb-4">
+                    <h6 class="fw-bold mb-3">Company</h6>
+                    <ul class="list-unstyled text-muted small">
+                        <li class="mb-2"><a href="about.html" class="text-decoration-none text-muted">About Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Careers</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 text-end d-none d-lg-block">
+                    <img src="https://placehold.co/200x150/f0f0f0/ccc?text=Snack+Pack" alt="Footer Deco">
+                </div>
+            </div>
+            <div class="row mt-4 pt-3 border-top">
+                <div class="col-12 text-center small text-muted">
+                    &copy; 2024 Ab-Snack Design. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function kirimKeWhatsApp(e) {
+            e.preventDefault(); // Mencegah reload halaman
+
+            // Ambil data dari form
+            const namaDepan = document.getElementById('namaDepan').value;
+            const namaBelakang = document.getElementById('namaBelakang').value;
+            const email = document.getElementById('email').value;
+            const subjek = document.getElementById('subject').value;
+            const pesan = document.getElementById('pesan').value;
+
+            // Nomor WA Tujuan (Sesuai dengan navbar)
+            const nomorWA = "6281234567890";
+
+            // Format Pesan
+            const teksPesan = 
+`Halo Admin AB-SNACK, ada pesan baru dari Website:
+
+*Nama:* ${namaDepan} ${namaBelakang}
+*Email:* ${email}
+*Subject:* ${subjek}
+
+*Pesan:*
+${pesan}`;
+
+            // Encode pesan agar bisa jadi URL
+            const pesanEncoded = encodeURIComponent(teksPesan);
+
+            // Buka WhatsApp
+            window.open(`https://wa.me/${nomorWA}?text=${pesanEncoded}`, '_blank');
+        }
+    </script>
+</body>
+</html>
